@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block horizontal_nav %}
+<ul class="nav">
+   <li class="active"><a href="/contact">ליצור קשר</a></li>
+   <li><a href="/about">עלינו</a></li>
+   <li><a href="/products">מוצרים</a></li>
+   <li><a href="/">בית</a></li>
+</ul>
+{% endblock %}
+
+{% block vertical_nav %}
+
+	<div class="span2">
+      <div class="well sidebar-nav">
+	      <ul class="nav nav-list">
+   	      <li class="nav-header">Navigation</li>
+            <li><a href="/"><i class="icon-home"></i>בית</a></li>
+            <li><a href="/products"><i class="icon-shopping-cart"></i>מוצרים</a></li>
+            <li><a href="/about"><i class="icon-briefcase"></i>עלינו</a></li>
+            <li class="active"><a href="/contact"><i class="icon-envelope"></i>ליצור קשר</a></li>
+         </ul>
+      </div><!--/.well -->
+   </div><!--/span-->
+
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+    <li><span class="divider">/</span><a href="/">בית</a></li>
+    <li class="active">ליצור קשר</li>
+    </ul>
+{% endblock %}
+
+
+{% block main %}
+
+
+
+
+{% endblock %}

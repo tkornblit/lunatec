@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+
+{% block horizontal_nav %}
+<ul class="nav">
+   <li><a href="/contact">ליצור קשר</a></li>
+   <li><a href="/about">עלינו</a></li>
+   <li class="active"><a href="/products">מוצרים</a></li>
+   <li><a href="/">בית</a></li>
+</ul>
+{% endblock %}
+
+{% block vertical_nav %}
+
+	<div class="span2">
+      <div class="well sidebar-nav">
+	      <ul class="nav nav-list" id="root-nav">
+   	      <li class="nav-header">Navigation</li>
+            <li><a href="/"><i class="icon-home"></i>בית</a></li>
+            <li class="active"><a href="/products"><i class="icon-shopping-cart"></i>מוצרים</a>
+					<ul class="nav nav-list">
+						{% for category in categories %}
+							<li><a href="/products/{{category.id}}">{{category}}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+
+            <li><a href="/about"><i class="icon-briefcase"></i>עלינו</a></li>
+            <li><a href="/contact"><i class="icon-envelope"></i>ליצור קשר</a></li>
+         </ul>
+      </div><!--/.well -->
+   </div><!--/span-->
+
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+    <li><span class="divider">/</span><a href="/">בית</a></li>
+    <li class="active">מוצרים</li>
+    </ul>
+{% endblock %}
+
+
+{% block main %}
+
+	<div class="span10">
+
+		<ul class="thumbnails">
+		{% for category in categories %}
+
+			<li class="span2">
+				<a href="/products/{{category.id}}" class="thumbnail">
+					<img class="category-image" src="{{STATIC_URL}}{{category.image}}">
+					<h4>{{category}}</h4>
+				</a>
+			</li>
+
+		{% endfor %}
+		</ul>
+
+
+
+
+	</div>
+
+
+
+
+{% endblock %}

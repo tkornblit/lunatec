@@ -1,0 +1,87 @@
+{% extends 'index.html' %}
+
+{% block horizontal_nav %}
+<ul class="nav">
+   <li><a href="/">בית</a></li>
+   <li class="active"><a href="/products">מוצרים</a></li>
+   <li><a href="/about">עלינו</a></li>
+   <li><a href="/contact">ליצור קשר</a></li>
+</ul>
+{% endblock %}
+
+{% block vertical_nav %}
+
+	<div class="span2">
+      <div class="well sidebar-nav">
+	      <ul id="root-nav" class="nav nav-list">
+   	      <li class="nav-header">Navigation</li>
+            <li><a href="/"><i class="icon-home"></i>בית</a></li>
+            <li><a href="/products"><i class="icon-shopping-cart"></i>מוצרים</a>
+					<ul class="nav nav-list">
+						{% for c in categories %}
+							<li><a href="/products/{{c.id}}">{{c}}</a>
+								{% if c == category %}
+									<ul class="nav nav-list">
+									{% for sub in category.subcategories.all %}
+										<li {% if sub == subcategory %} class="active" {% endif %}><a href="/products/{{c.id}}/{{sub.id}}">{{sub}}</a>
+											{% if sub == subcategory %}
+												<ul class="nav nav-list">
+												{% for product in subcategory.products.all %}
+													<li><a href="/products/{{c.id}}/{{sub.id}}/{{product.id}}">{{product}}</a></li>
+												{% endfor %}
+												</ul>
+											{% endif %}
+										</li>
+									{% endfor %}
+									</ul>
+								{% endif %}
+							</li>
+							
+						{% endfor %}
+					</ul>
+				</li>
+
+            <li><a href="/about"><i class="icon-briefcase"></i>עלינו</a></li>
+            <li><a href="/contact"><i class="icon-envelope"></i>ליצור קשר</a></li>
+         </ul>
+      </div><!--/.well -->
+   </div><!--/span-->
+
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+    <li><a href="/">בית</a> <span class="divider">/</span></li>
+    <li><a href="/products">מוצרים</a> <span class="divider">/</span></li>
+    <li><a href="/products/{{category.id}}/">{{category}}</a> <span class="divider">/</span></li>
+    <li class="active">{{subcategory}}</li>
+    </ul>
+{% endblock %}
+
+
+{% block main %}
+
+<div class="span10">
+
+	<h1>{{subcategory}}</h1>
+
+ 	<ul class="thumbnails">
+      {% for product in subcategory.products.all %}
+
+         <li class="span3">
+            <a href="/products/{{category.id}}/{{subcategory.id}}/{{product.id}}" class="thumbnail">
+					<img src="{{MEDIA_URL}}{{product.image}}">
+               <h3>{{product}}</h3>
+					<p>{{product.short_description}}</p>
+            </a>
+
+         </li>
+
+      {% endfor %}
+      </ul>
+
+
+</div>
+
+
+{% endblock %}
