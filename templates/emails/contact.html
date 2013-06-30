@@ -1,0 +1,17 @@
+<h1>לונטק שְׁאִלתָה</h1>
+
+<table>
+	<tr><td>First Name</td><td>{{contact.first_name}}</td></tr>
+	<tr><td>Last Name</td><td>{{contact.last_name}}</td></tr>
+	{% if contact.product %}	
+		<tr><td>Product Interested In</td><td>{{contact.product}}</td></tr> 
+	{% endif %}
+	<tr><td>Email</td><td>{{contact.email}}</td></tr>
+	{% if contact.phone %}
+		<tr><td>Phone</td><td>{{contact.phone}}</td></tr>
+	{% endif %}
+	<tr><td>Message</td><td>{{contact.message}}</td></tr>
+</table>
+
+
+

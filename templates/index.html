@@ -174,14 +174,14 @@
                     <div class="wrapper">
                         <div class="quote">
                             <span>“</span>
-                            There are many variations of passages of randomised words which don't look even slightly believable. You need to be sure there isn't anything embarrassing of text.
-                            <span></span>
+                            <p>There are many variations of passages of randomised words which don't look even slightly believable. You need to be sure there isn't anything embarrassing of text.</p>
+                            <span class="pull-right">”</span>
                         </div>
                         <div class="author">
                             <img src="img/user-display.png" />
-                            <div class="name">Alejandra Galvan Castillo</div>
+                            <div class="name">Ofer Lugassi</div>
                             <div class="info">
-                                Details Canvas
+                                LunaTec Inc.
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,6 @@
 						<div class="span4 contact">
 							<form data-bind="submit: submit">
 								<h3 class="footer_header">ליצור קשר</h3>
-											{% csrf_token %}
 											<ul>
 											{% for field in contact_form %}
 												<li>
@@ -225,8 +224,6 @@
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script type='text/javascript' src='{{STATIC_URL}}plugins/bootstrap/js/bootstrap.min.js'></script>
     <script type='text/javascript' src='{{STATIC_URL}}/js/knockout-2.2.1.js'></script>
-
- 	 {% block tail %}
   	 <script type='text/javascript'>
 		function contactViewModel(){
 			var self = this;
@@ -240,10 +237,8 @@
 				self.email = ko.observable();
 				self.email.errors = ko.observable();
 
-				self.notes = ko.observable();
-				self.notes.errors = ko.observable();
-
-				self.csrfmiddlewaretoken = "{{ csrf_token }}";
+				self.message = ko.observable();
+				self.message.errors = ko.observable();
 
 				self.handleErrors = function(errors){
 					$.each(ko.toJS(self),function(field,value){ 
@@ -259,6 +254,7 @@
 
 				self.submit = function(){
 					var data = $.parseJSON(ko.toJSON(self));
+					console.log(data);
 					$.ajax({
 						url: "{% url 'ajax_contact' %}",
 						type : "POST",
@@ -269,7 +265,7 @@
 								self.handleErrors(data.errors);
 							}
 							else{
-								$('.contact').html("<div class='alert alert-success text-center' id='confirmation_message'><b>ליצור קשר Sent!</b></div>");
+								$('.contact').html("<div class='alert alert-success text-center' id='confirmation_message'><b>ליצור קשר נשלח!</b></div>");
 							}
 						}
 					});
@@ -282,6 +278,7 @@
 		ko.applyBindings(new contactViewModel(),$(".contact")[0]);
 
 	 </script>
+	{% block tail %}
     <script type='text/javascript'>
 		$(document).ready(function(){
 

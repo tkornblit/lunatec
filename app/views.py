@@ -11,9 +11,7 @@ from forms import *
 
 def home(request):
 	results = {}
-	results['contact_form'] = ContactForm()
-	
-	return render_to_response('index.html',results ,context_instance=RequestContext(request))
+	return render_to_response('home.html',results ,context_instance=RequestContext(request))
 	
 def about(request):
 	results = {}
@@ -21,6 +19,8 @@ def about(request):
 
 def contact(request):
 	results = {}
+	ContactForm = ContactFormFactory()
+	results['form'] = ContactForm()
 	return render_to_response('contact.html',results ,context_instance=RequestContext(request))
 
 def products(request):

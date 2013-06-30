@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from random import randrange
 
 
 class Product(models.Model):
@@ -19,6 +20,15 @@ class Category(models.Model):
 	def __unicode__(self):
 		return "%s" % (self.name)
 
+	def image(self):
+		products = self.products.all()
+		if products.count() == 0:
+			return None
+		else:
+			index = randrange(0,products.count())
+			product = products[index]
+			return product.image
+
 class SubCategory(models.Model):
 	category = models.ForeignKey("Category",related_name="subcategories")
 	name = models.CharField(max_length=50)
@@ -26,11 +36,21 @@ class SubCategory(models.Model):
 	def __unicode__(self):
 		return "%s" % (self.name)
 
+	def image(self):
+		products = self.products.all()
+		if products.count() == 0:
+			return None
+		else:
+			index = randrange(0,products.count())
+			product = products[index]
+			return product.image
+		
+
 class Contact(models.Model):
 	first_name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	product = models.ForeignKey("Product",null=True,blank=True)
 	email = models.EmailField(max_length=75)
-	phone = models.CharField(max_length=75)
-	notes = models.TextField()
+	phone = models.CharField(max_length=75,null=True,blank=True)
+	message = models.TextField()
 

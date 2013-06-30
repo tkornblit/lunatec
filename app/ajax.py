@@ -14,6 +14,7 @@ from django.utils import simplejson as json
 
 @csrf_exempt
 def contact(request):
+	ContactForm = ContactFormFactory()
 	form = ContactForm(request.POST)
 	if form.is_valid():
 		form.save()

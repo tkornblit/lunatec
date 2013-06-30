@@ -15,7 +15,6 @@
       <div class="well sidebar-nav">
 	      <ul class="nav nav-list" id="root-nav">
    	      <li class="nav-header">Navigation</li>
-            <li><a href="/"><i class="icon-home"></i>בית</a></li>
             <li class="active"><a href="/products"><i class="icon-shopping-cart"></i>מוצרים</a>
 					<ul class="nav nav-list">
 						{% for category in categories %}
@@ -23,9 +22,6 @@
 						{% endfor %}
 					</ul>
 				</li>
-
-            <li><a href="/about"><i class="icon-briefcase"></i>עלינו</a></li>
-            <li><a href="/contact"><i class="icon-envelope"></i>ליצור קשר</a></li>
          </ul>
       </div><!--/.well -->
    </div><!--/span-->
@@ -49,7 +45,7 @@
 
 			<li class="span2">
 				<a href="/products/{{category.id}}" class="thumbnail">
-					<img class="category-image" src="{{STATIC_URL}}{{category.image}}">
+					<img class="category-image" src="{{MEDIA_URL}}{{category.image}}">
 					<h4>{{category}}</h4>
 				</a>
 			</li>

@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+
+			 {% block horizontal_nav %}
+            <ul class="nav" style="float:left" role="navigation">
+              <li><a href="/contact">ליצור קשר</a></li>
+              <li><a href="/about">עלינו</a></li>
+              <li><a href="/products">מוצרים</a></li>
+              <li class="active"><a href="/">בית</a></li>
+            </ul>
+			 {% endblock %}
+
+		{% block breadcrumb %}
+	    <ul class="breadcrumb">
+	   	 <li><a href="/">בית</a></li>
+    	</ul>
+		{% endblock %}
+
+     {% block vertical_nav %}{% endblock %}
+
+		{% block main %}
+      <div class="span12">
+          <div class="row-fluid">
+	         <div id="myCarousel" class="carousel slide span12">
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+						<div class="item active"><img src="{{STATIC_URL}}/images/home_image_1.jpg"></div>
+						<div class="item"><img src="{{STATIC_URL}}/images/home_image_2.jpg"></div>
+					</div>
+					<!-- Carousel nav -->
+					<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+					<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          	</div>
+          </div>
+          <div class="row-fluid">
+            <div class="span4 text-center">
+              <h2>מוצרים</h2>
+              <p>חגורות תזמון, חגורות תזמון לשינוע, ציפויים מיוחדים ע"ג חגורות, חגורות פלסטיק (Components), מנועי תוף ( Drum motor ), צירים למסועים, צירים ליניאריים, גלגלי שיניים, מחברים ועוד.
+במידת הצורך, לונטק מספקת מוצרים מותאמים לדרישת הלקוח.</p>
+              <p><a class="btn" href="/products">לִרְאוֹת מוצרים &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4 text-center">
+              <h2>קצת עלינו</h2>
+              <p>
+חברת "לונטק פתרונות הנדסיים בע"מ" הינה חברה העוסקת במתן פתרונות לתחום השינוע.
+החברה משווקת מוצרים לתחום השינוע המיוצרים בחברות המובילות בעולם, כגון חברת "Norditec " מגרמניה, חברת "Van der Graaf " מהולנד ועוד.
+</p>
+              <p><a class="btn" href="/about">לִרְאוֹת קצת עלינו &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4 text-center">
+              <h2>ליצור קשר</h2>
+              <p>ניתן ליצור קשר בעזרת הצלמית המיועדת לכך ואנו נחזור אליכם בהקדם.</p>
+              <p><a class="btn" href="/contact">לִרְאוֹת ליצור קשר Us &raquo;</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+		{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'home.html' %}
 
 {% block horizontal_nav %}
 <ul class="nav">
@@ -9,21 +9,6 @@
 </ul>
 {% endblock %}
 
-{% block vertical_nav %}
-
-	<div class="span2">
-      <div class="well sidebar-nav">
-	      <ul class="nav nav-list">
-   	      <li class="nav-header">Navigation</li>
-            <li><a href="/"><i class="icon-home"></i>בית</a></li>
-            <li><a href="/products"><i class="icon-shopping-cart"></i>מוצרים</a></li>
-            <li><a href="/about"><i class="icon-briefcase"></i>עלינו</a></li>
-            <li class="active"><a href="/contact"><i class="icon-envelope"></i>ליצור קשר</a></li>
-         </ul>
-      </div><!--/.well -->
-   </div><!--/span-->
-
-{% endblock %}
 
 {% block breadcrumb %}
     <ul class="breadcrumb">
@@ -34,8 +19,90 @@
 
 
 {% block main %}
+<h1 class="text-center">ליצור קשר</h1>
+
+<br />
+
+<div class="row-fluid">
+
+	<form data-bind="submit: submit" class="contact_form">
+		<fieldset class="text-center">
+			{% for field in form %}
+				<div style="position:relative;">
+					<label>{{field.label}}</label>
+					{{field}}
+					<span data-bind="text:{{field.name}}.errors, visible: {{field.name}}.errors" class='alert alert-error' style="position:absolute;"></span>
+				</div>
+			{% endfor %}
+			<br />
+		<button type="submit" class="btn">Submit</button>
+		</fieldset>
+	</form>
+</div>
+
+{% endblock %}
 
 
+{% block tail %}
+<script type="text/javascript">
+      function contactPageViewModel(){
+         var self = this;
+
+            self.first_name = ko.observable();
+            self.first_name.errors = ko.observable();
+
+            self.last_name = ko.observable();
+            self.last_name.errors = ko.observable();
+
+            self.email = ko.observable();
+            self.email.errors = ko.observable();
+
+            self.message = ko.observable();
+            self.message.errors = ko.observable();
+
+            self.product = ko.observable();
+            self.product.errors = ko.observable();
+
+            self.phone = ko.observable();
+            self.phone.errors = ko.observable();
+
+            self.handleErrors = function(errors){
+               $.each(ko.toJS(self),function(field,value){ 
+                  if(self[field].hasOwnProperty('errors')){ 
+                     self[field].errors(false);
+                  }
+               });
+               $.map(errors,function(error){
+                  self[error.field].errors(error.value);
+               });
+                     
+            };
+
+            self.submit = function(){
+               var data = $.parseJSON(ko.toJSON(self));
+               console.log(data);
+               $.ajax({
+                  url: "{% url 'ajax_contact' %}",
+                  type : "POST",
+                  data : data,
+                  success : function(data){
+                     console.log(data);
+                     if(!(data.success)){
+                        self.handleErrors(data.errors);
+                     }
+                     else{
+                        $('.contact_form').html('<h3 class="alert alert-success text-center">.יש לך הודעה נשלח בהצלחה לנו .אנחנו נהיה איתך קשר בקרוב </h3>');
+                     }
+                  }
+               });
+            };
 
 
+      }
+
+
+      ko.applyBindings(new contactPageViewModel(),$(".contact_form")[0]);
+
+
+</script>
 {% endblock %}

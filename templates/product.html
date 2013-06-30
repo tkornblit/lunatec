@@ -2,10 +2,10 @@
 
 {% block horizontal_nav %}
 <ul class="nav">
-   <li><a href="/">בית</a></li>
-   <li class="active"><a href="/products">מוצרים</a></li>
-   <li><a href="/about">עלינו</a></li>
    <li><a href="/contact">ליצור קשר</a></li>
+   <li><a href="/about">עלינו</a></li>
+   <li class="active"><a href="/products">מוצרים</a></li>
+   <li><a href="/">בית</a></li>
 </ul>
 {% endblock %}
 
@@ -52,10 +52,10 @@
 
 {% block breadcrumb %}
     <ul class="breadcrumb">
-    <li><a href="/">בית</a> <span class="divider">/</span></li>
-    <li><a href="/products">מוצרים</a> <span class="divider">/</span></li>
-    <li><a href="/products/{{category.id}}/">{{category}}</a> <span class="divider">/</span></li>
-    <li><a href="/products/{{category.id}}/{{subcategory.id}}/">{{subcategory}}</a><span class='divider'>/</span></li>
+    <li><span class="divider">/</span><a href="/">בית</a></li>
+    <li><span class="divider">/</span><a href="/products">מוצרים</a></li>
+    <li><span class="divider">/</span><a href="/products/{{category.id}}/">{{category}}</a></li>
+    <li><span class='divider'>/</span><a href="/products/{{category.id}}/{{subcategory.id}}/">{{subcategory}}</a></li>
     <li class="active">{{product}}</li>
     </ul>
 {% endblock %}
@@ -63,17 +63,13 @@
 
 {% block main %}
 
-<div class="span10">
+<div class="span10 text-center">
 
 	<h1>{{product}}</h1>
 
-	<table class='table table-condensed'>
-		<tbody>
-			<tr><td><img src="{{MEDIA_URL}}{{product.image}}"></td></tr>
-			<tr><td>{{product.short_description}}</td></tr>
-			<tr><td>{{product.long_description}}</td></tr>
-		</tbody>
-	</table>
+			<img src="{{MEDIA_URL}}{{product.image}}">
+			<p>{{product.short_description}}</p>
+			<p>{{product.long_description}}</p>
 
 
 
